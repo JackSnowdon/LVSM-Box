@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block page_title %}{{ profile }}'s Profile{% endblock %} {% block content %}
+
+<h2>{{ profile }}'s profile</h2>
+
+<p>{{ user.email }} </p>
+
+<h3 class="mb-3">Posts:</h3>
+<div class="row">
+    {% for p in posts %}
+    <div class="col-12 blog-link">
+        <p class="report-links"><a href="{% url 'view_post' p.id %}">{{ p.title }}</a></p>
+    </div> {% endfor %}
+
+</div>
+
+{% endblock %}
