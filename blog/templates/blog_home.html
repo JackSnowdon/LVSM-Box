@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load static %} {% block page_title %} LVSM | Blog {% endblock %} {% block content %}
+
+<div class="row">
+    <div class="col-12 text-center">
+        <h1>Blog Posts!</h1>
+        <hr> {% if user.profile.staff_access %}
+        <a href="{% url 'add_post' %}" role="button" class="btn btn-success" id="all-stock" aria-disabled="false">Add Post</a> {% endif %}
+    </div>
+</div>
+
+{% for p in posts %}
+<div class="row">
+    <div class="col-12 blog-link">
+        <a href="{% url 'view_post' p.id %}">
+            <h2>{{ p.title }}</h2>
+            <p class="mb-0"> - Last Updated On: {{ p.last_modified }}</p>
+            <p> - Posted By: {{ p.done_by }}</p>
+        </a>
+    </div>
+</div>
+<p class="lead">{{ p.body|truncatewords:25 }}</p>
+{% if user.profile.staff_access %}
+<div class="row">
+    <div class="col-12"><a href="{% url 'edit_post' p.id  %}" role="button" class="btn btn-warning" aria-disabled="false">Edit Post</a></div>
+</div>
+{% endif %}
+
+<br> {% endfor %} {% endblock %}

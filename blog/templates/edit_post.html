@@ -1,0 +1,26 @@
+ {% extends 'base.html' %} {% load crispy_forms_tags %} {% load static %} {% block page_title %} Edit Post {% endblock %} {% block content %}
+
+<div class="row">
+    <div class="col-12 text-center">
+        <h2>Edit Post</h2>
+        <form role="form" method="post" id="edit-post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-12 mb-0">
+                    {{ post_form.title|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12 mb-0">
+                    {{ post_form.body|as_crispy_field }}
+                </div>
+            </div>
+            <input class="btn btn-success" id="submit_post" name="commit" type="submit" value="Edit Post">
+            <a href="{% url 'delete_post' this_post.id  %}" role="button" class="btn btn-danger" aria-disabled="false">Delete Post</a>
+            <a href="{% url 'blog_home'  %}" role="button" class="btn btn-warning" aria-disabled="false">Back To All Blogs</a>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

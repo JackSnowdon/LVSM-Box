@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load static %} {% block page_title %} View {{ this_post.title|truncatewords:3 }} {% endblock %} {% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <h2>{{ this_post.title }}</h2>
+        <p>Posted On: {{ this_post.created_on }} </p>
+        <p class="small">Views: {{ this_post.views }}</p>
+
+    </div>
+
+    <div class="col-12">
+        <p>{{ this_post.body }}</p>
+        <p class="small">Posted by: {{ this_post.done_by }} Last Modified: {{ this_post.last_modified }}</p>
+        {% if user.profile.staff_access %}
+        <a href="{% url 'edit_post' this_post.id  %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">Edit Post</a> <br> {% endif %}
+        <a href="{% url 'blog_home'  %}" role="button" class="btn btn-warning" aria-disabled="false">Back To All Blogs</a>
+    </div>
+</div>
+{% endblock %}
