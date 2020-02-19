@@ -17,7 +17,7 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-if os.getenv("HOSTNAME") == "lvsm.herokuapp.com/":
+if os.getenv("HOSTNAME") == "lvsm.herokuapp.com":
     ALLOWED_HOSTS = [os.getenv("HOSTNAME")]
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
