@@ -12,17 +12,30 @@ def blog_home(request):
     return render(request, "blog_home.html", {"posts": posts})
 
 
+@login_required
 def content_2(request):
-    posts = Post.objects.filter(content_level=2)
-    return render(request, "content_2.html", {"posts": posts})
+    if request.user.profile.staff_access:
+        posts = Post.objects.filter(content_level=2)
+        return render(request, "content_2.html", {"posts": posts})
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+        return redirect("blog_home")
 
 
+@login_required
 def content_3(request):
-    user = User.objects.get(email=request.user.email)
-    profile = user.profile
-    posts = profile.posts.filter(content_level=3)
-    return render(request, "content_3.html", {"posts": posts})
-
+    if request.user.profile.staff_access:
+        user = User.objects.get(email=request.user.email)
+        profile = user.profile
+        posts = profile.posts.filter(content_level=3)
+        return render(request, "content_3.html", {"posts": posts})
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+        return redirect("blog_home")
 
 
 @login_required
