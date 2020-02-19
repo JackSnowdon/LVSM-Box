@@ -17,7 +17,7 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-if os.getenv("HOSTNAME") == "lvsm.herokuapp.coheroku config:set DISABLE_COLLECTSTATIC=1m":
+if os.getenv("HOSTNAME") == "lvsm.herokuapp.com":
     ALLOWED_HOSTS = [os.getenv("HOSTNAME")]
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
@@ -28,14 +28,14 @@ else:
     ALLOWED_HOSTS = []
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = True
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-      }
-    }
+#    DATABASES = {
+#        "default": {
+#            "ENGINE": "django.db.backends.sqlite3",
+#            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#      }
+#    }
 
-# DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
 
 # Application definition
