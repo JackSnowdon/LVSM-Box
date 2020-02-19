@@ -17,7 +17,7 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-if os.getenv("HOSTNAME") == "lvsm.herokuapp.com":
+if os.getenv("HOSTNAME") == "lvsm.herokuapp.coheroku config:set DISABLE_COLLECTSTATIC=1m":
     ALLOWED_HOSTS = [os.getenv("HOSTNAME")]
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
@@ -89,13 +89,6 @@ WSGI_APPLICATION = 'pbox.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -144,3 +137,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
