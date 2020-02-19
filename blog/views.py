@@ -1,14 +1,28 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from datetime import datetime
 from .models import Post
 from .forms import PostForm
 
 
 def blog_home(request):
-    posts = Post.objects.all().order_by('-created_on')
+    posts = Post.objects.filter(content_level=1)
     return render(request, "blog_home.html", {"posts": posts})
+
+
+def content_2(request):
+    posts = Post.objects.filter(content_level=2)
+    return render(request, "content_2.html", {"posts": posts})
+
+
+def content_3(request):
+    user = User.objects.get(email=request.user.email)
+    profile = user.profile
+    posts = profile.posts.filter(content_level=3)
+    return render(request, "content_3.html", {"posts": posts})
+
 
 
 @login_required

@@ -1,11 +1,9 @@
-{% extends 'base.html' %} {% load static %} {% block page_title %} LVSM | Blog {% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block page_title %} LVSM | Our Posts {% endblock %} {% block content %}
 
 <div class="row">
     <div class="col-12 text-center">
-        <h1>Blog Posts!</h1> {% if user.profile.staff_access %}
-        <a href="{% url 'add_post' %}" role="button" class="btn btn-success" id="add-post" aria-disabled="false">Add Post</a>
-        <a href="{% url 'content_2' %}" role="button" class="btn btn-success" id="shared-posts" aria-disabled="false">Shared Posts</a>
-        <a href="{% url 'content_3' %}" role="button" class="btn btn-success" id="private-posts" aria-disabled="false">Private Posts</a>{% endif %}
+        <h1>Shared Posts Between Us</h1>
+        <a href="{% url 'blog_home' %}" role="button" class="btn btn-success" id="all-blogs" aria-disabled="false">Blog Home</a>
     </div>
 </div>
 {% for p in posts %}
