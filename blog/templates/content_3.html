@@ -9,18 +9,14 @@
 {% for p in posts %}
 <div class="row">
     <div class="col-12 blog-link">
+        <h2>{{ p.title }} {% if user.profile.staff_access %}<span> - <a href="{% url 'edit_post' p.id  %}" class="icon-link" aria-disabled="false"><i class="fas fa-pencil-alt"></i></a></span> {% endif %}</h2>
         <a href="{% url 'view_post' p.id %}">
-            <h2>{{ p.title }}</h2>
             <p class="mb-0"> - Last Updated On: {{ p.last_modified }}</p>
             <p> - Posted By: {{ p.done_by }}</p>
+            <p class="lead">{{ p.body|truncatewords:25 }}</p>
         </a>
     </div>
 </div>
-<p class="lead">{{ p.body|truncatewords:25 }}</p>
-{% if user.profile.staff_access %}
-<div class="row">
-    <div class="col-12"><a href="{% url 'edit_post' p.id  %}" role="button" class="btn btn-warning" aria-disabled="false">Edit Post</a></div>
-</div>
-{% endif %}
+
 
 <br> {% endfor %} {% endblock %}

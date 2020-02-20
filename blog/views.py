@@ -107,4 +107,3 @@ def view_post(request, pk):
     this_post.views += 1
     this_post.save()
     return render(request, "view_post.html", {"this_post": this_post})
-

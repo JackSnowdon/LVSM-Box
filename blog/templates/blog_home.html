@@ -1,28 +1,27 @@
 {% extends 'base.html' %} {% load static %} {% block page_title %} LVSM | Blog {% endblock %} {% block content %}
 
-<div class="row">
+<div class="row mb-3">
     <div class="col-12 text-center">
         <h1>Blog Posts!</h1> {% if user.profile.staff_access %}
-        <a href="{% url 'add_post' %}" role="button" class="btn btn-success" id="add-post" aria-disabled="false">Add Post</a>
-        <a href="{% url 'content_2' %}" role="button" class="btn btn-success" id="shared-posts" aria-disabled="false">Shared Posts</a>
-        <a href="{% url 'content_3' %}" role="button" class="btn btn-success" id="private-posts" aria-disabled="false">Private Posts</a>{% endif %}
+        <a href="{% url 'add_post' %}" role="button" class="btn btn-success" id="add-post" aria-disabled="false">Add Post</a> {% endif %}
     </div>
 </div>
-{% for p in posts %}
+{% if user.profile.staff_access %}
+<div class="row">
+    <div class="col-12 text-center">
+        <a href="{% url 'content_2' %}" role="button" class="btn btn-success" id="shared-posts" aria-disabled="false">Shared Posts</a>
+        <a href="{% url 'content_3' %}" role="button" class="btn btn-success" id="private-posts" aria-disabled="false">Private Posts</a>
+    </div>
+</div>
+{% endif %} {% for p in posts %}
 <div class="row">
     <div class="col-12 blog-link">
+        <h2>{{ p.title }} {% if user.profile.staff_access %}<span> - <a href="{% url 'edit_post' p.id  %}" class="icon-link" aria-disabled="false"><i class="fas fa-pencil-alt"></i></a></span> {% endif %}</h2>
         <a href="{% url 'view_post' p.id %}">
-            <h2>{{ p.title }}</h2>
             <p class="mb-0"> - Last Updated On: {{ p.last_modified }}</p>
             <p> - Posted By: {{ p.done_by }}</p>
+            <p class="lead">{{ p.body|truncatewords:25 }}</p>
         </a>
     </div>
 </div>
-<p class="lead">{{ p.body|truncatewords:25 }}</p>
-{% if user.profile.staff_access %}
-<div class="row">
-    <div class="col-12"><a href="{% url 'edit_post' p.id  %}" role="button" class="btn btn-warning" aria-disabled="false">Edit Post</a></div>
-</div>
-{% endif %}
-
 <br> {% endfor %} {% endblock %}

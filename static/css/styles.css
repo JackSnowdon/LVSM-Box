@@ -49,6 +49,7 @@
 
 /* Blog */
 
+.icon-link i,
 .blog-link a {
     text-decoration: none;
     color: #fafafa;
@@ -58,6 +59,12 @@
     -o-transition: all 0.35s ease-in-out;
 }
 
+.icon-link i {
+    font-size: 22px;
+    color: #d19090;
+}
+
+.icon-link i:hover,
 .blog-link a:hover {
     color: #9ac54a;
 }
