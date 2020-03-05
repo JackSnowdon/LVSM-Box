@@ -9,4 +9,5 @@ urlpatterns = [
     path(r'edit_post/<int:pk>', edit_post, name="edit_post"),
     path(r'view_post/<int:pk>', view_post, name="view_post"),
     path(r'delete_post/<int:pk>', delete_post, name="delete_post"),
+    path(r'add_comment/<int:pk>', add_comment, name="add_comment"),
 ]
